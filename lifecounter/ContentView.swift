@@ -11,93 +11,100 @@ struct ContentView: View {
     @State var p1Life = 20
     @State var p2Life = 20
     var body: some View {
-        VStack(alignment: .center, spacing: 50) {
-            Text("Player 1")
-                .font(.largeTitle)
-                .padding(.horizontal)
-            Text("\(p1Life)")
-                .padding(.horizontal)
-                .font(.system(size: 30))
-                
-                
-            HStack(alignment: .center, spacing: 50) {
-                Button(action: {
-                    print("+ pressed")
-                    self.p1Life += 1
-                }) {
-                    Text("+")
+        GeometryReader { geometry in
+            VStack {
+                Spacer()
+                Text("Player 1")
+                    .font(.largeTitle)
+                    .padding()
+                Text("\(p1Life)")
+                    .padding()
+                    .font(.system(size: 30))
+                    
+                    
+                HStack(alignment: .center, spacing: 50) {
+                    Button(action: {
+                        print("+ pressed")
+                        self.p1Life += 1
+                    }) {
+                        Text("+")
+                    }
+                    .buttonStyle(.borderedProminent)
+                    
+                    Button(action: {
+                        print("- pressed")
+                        self.p1Life -= 1
+                    }) {
+                        Text("-")
+                    }
+                    .buttonStyle(.borderedProminent)
+                    
+                    Button(action: {
+                        print("+5 pressed")
+                        self.p1Life += 5
+                    }) {
+                        Text("+5")
+                    }
+                    .buttonStyle(.borderedProminent)
+                    
+                    Button(action: {
+                        print("-5 pressed")
+                        self.p1Life -= 5
+                    }) {
+                        Text("-5")
+                    }
+                    .buttonStyle(.borderedProminent)
                 }
-                .buttonStyle(.borderedProminent)
                 
-                Button(action: {
-                    print("- pressed")
-                    self.p1Life -= 1
-                }) {
-                    Text("-")
+                Spacer()
+                Text("Player 2")
+                    .font(.largeTitle)
+                    .padding()
+                Text("\(p2Life)")
+                    .padding()
+                    .font(.system(size: 30))
+                HStack(alignment: .center, spacing: 50) {
+                    Button(action: {
+                        self.p2Life += 1
+                    }) {
+                        Text("+")
+                    }
+                    .buttonStyle(.borderedProminent)
+                    
+                    Button(action: {
+                        self.p2Life -= 1
+                    }) {
+                        Text("-")
+                    }
+                    .buttonStyle(.borderedProminent)
+                    
+                    Button(action: {
+                        self.p2Life += 5
+                    }) {
+                        Text("+5")
+                    }
+                    .buttonStyle(.borderedProminent)
+                    
+                    Button(action: {
+                        self.p2Life -= 5
+                    }) {
+                        Text("-5")
+                    }
+                    .buttonStyle(.borderedProminent)
                 }
-                .buttonStyle(.borderedProminent)
-                
-                Button(action: {
-                    print("+5 pressed")
-                    self.p1Life += 5
-                }) {
-                    Text("+5")
+                Spacer()
+                if p1Life <= 0 {
+                    Text("Player 1 Loses")
+                        .font(.system(size: 20))
                 }
-                .buttonStyle(.borderedProminent)
-                
-                Button(action: {
-                    print("-5 pressed")
-                    self.p1Life -= 5
-                }) {
-                    Text("-5")
+                if p2Life <= 0 {
+                    Text("Player 2 Loses")
+                        .font(.system(size: 20))
                 }
-                .buttonStyle(.borderedProminent)
+                Spacer()
             }
-        }
-        .padding()
-        
-        VStack(alignment: .center, spacing: 50) {
-            Text("Player 2")
-                .font(.largeTitle)
-                .padding(.horizontal)
-            Text("\(p2Life)")
-                .padding(.horizontal)
-                .font(.system(size: 30))
-            HStack(alignment: .center, spacing: 50) {
-                Button(action: {
-                    self.p2Life += 1
-                }) {
-                    Text("+")
-                }
-                .buttonStyle(.borderedProminent)
-                
-                Button(action: {
-                    self.p2Life -= 1
-                }) {
-                    Text("-")
-                }
-                .buttonStyle(.borderedProminent)
-                
-                Button(action: {
-                    self.p2Life += 5
-                }) {
-                    Text("+5")
-                }
-                .buttonStyle(.borderedProminent)
-                
-                Button(action: {
-                    self.p2Life -= 5
-                }) {
-                    Text("-5")
-                }
-                .buttonStyle(.borderedProminent)
-            }
-        }
-        if p1Life <= 0 {
-            Text("Player 1 Loses")
-        }
-        if p2Life <= 0 {
-            Text("Player 2 Loses")
+            .padding()
+            .frame(width: geometry.size.width, height: geometry.size.height)
         }
     }
 }
